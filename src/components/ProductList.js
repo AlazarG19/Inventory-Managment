@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { DataManager } from '@syncfusion/ej2-data';
+import { connect } from 'react-redux'
 import { ColumnDirective, ColumnsDirective, Filter, GridComponent } from '@syncfusion/ej2-react-grids';
 import { Group, Inject, Page, Sort, Resize } from '@syncfusion/ej2-react-grids';
 import "../style/productlist.css"
 import Row from './Row';
-function ProductList() {
+function ProductList(props) {
     const pageSettings = { pageSize: 15 };
     const sortSettings = {
         columns: [
@@ -23,9 +24,13 @@ function ProductList() {
         });
         setData(newdata)
     }, [])
+    let changeSelectedItem = () => {
+        console.log(props)
+        props.changeSelectedItem({ itemname: "", itemid: "1", itemininventory: "", itemonshelf: "", importedday: "", itembought: "" });
+    }
     return (
         <div className="gridComponent">
-            <GridComponent recordClick={(args) => { console.log(args.rowData) }} autoFitColumns={true} dataSource={data} allowPaging={true} pageSettings={pageSettings} filterSettings={filterSettings} allowSorting={true} sortSettings={sortSettings} allowFiltering={true}>
+            <GridComponent recordClick={(args) => { console.log(args.rowData); changeSelectedItem() }} autoFitColumns={true} dataSource={data} allowPaging={true} pageSettings={pageSettings} filterSettings={filterSettings} allowSorting={true} sortSettings={sortSettings} allowFiltering={true}>
                 <ColumnsDirective>
                     <ColumnDirective field='OrderID' headerText='Order ID' width='120' textAlign="Right" />
                     <ColumnDirective field='CustomerID' headerText='Customer ID' width='150' />
@@ -36,5 +41,15 @@ function ProductList() {
             </GridComponent>
         </div>)
 }
+const mapState = (state) => ({
+    count: state.count,
+    selecteditem: state.selecteditem,
+})
 
-export default ProductList
+const mapDispatch = (dispatch) => ({
+    increment: dispatch.count.increment,
+    asyncIncrement: dispatch.count.asyncIncrement,
+    changeSelectedItem: dispatch.selecteditem.changeSelectedItem,
+})
+
+export default connect(mapState, mapDispatch)(ProductList)

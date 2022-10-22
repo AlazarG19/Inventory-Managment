@@ -1,11 +1,15 @@
 import React from 'react'
+import { connect } from 'react-redux';
 import logo from '../assets/apple.png';
+
 import '../style/productsection.css';
-const ProductSection = () => {
+const ProductSection = (props) => {
+    console.log("product secton")
+    console.log(props)
     return (
         <div className="productsection col-6">
             <div className='row' >
-                <div className='col-6' >Item Name : Apple</div>
+                <div className='col-6' >Item Name : {props.count}</div>
                 <div className='col-6' >Item Type : Food</div>
             </div>
             <div className='row' >
@@ -38,5 +42,7 @@ const ProductSection = () => {
         </div>
     )
 }
-
-export default ProductSection
+const mapState = (state) => ({
+    count: state.count,
+})
+export default connect(mapState)(ProductSection)

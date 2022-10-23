@@ -5,7 +5,7 @@ function fileValue(value) {
     var path = value.value;
     console.log(path)
     var extenstion = path.split('.').pop();
-    if (extenstion == "jpg" || extenstion == "svg" || extenstion == "jpeg" || extenstion == "png" || extenstion == "gif") {
+    if (extenstion === "jpg" || extenstion === "svg" || extenstion === "jpeg" || extenstion === "png" || extenstion === "gif") {
         document.getElementById('image-preview').src = window.URL.createObjectURL(value.files[0]);
         var filename = path.replace(/^.*[\\\/]/, '').split('.').slice(0, -1).join('.');
         document.getElementById("filename").innerHTML = filename;
@@ -15,7 +15,6 @@ function fileValue(value) {
 }
 const AddNewItems = () => {
     return (
-
         <form className="row form-horizontal">
             <div className='col-6' >
                 <div className="image-upload">
@@ -32,7 +31,7 @@ const AddNewItems = () => {
                 </div>
             </div>
 
-            <div className='col-6'>
+            <div className='addproducts col-5'>
 
                 <legend>PRODUCTS</legend>
 

@@ -7,7 +7,7 @@ const ProductSection = (props) => {
     console.log("product secton")
     console.log(props)
     return (
-        <div className="productsection col-6">
+        <div className="productsection col-5">
             <div className='row' >
                 <div className='col-6' >Item Name : {props.count}</div>
                 <div className='col-6' >Item Type : Food</div>
@@ -38,7 +38,6 @@ const ProductSection = (props) => {
             <div className='row' >
                 <div className='col-6' >Sold Items Quantity : 10</div>
             </div>
-
         </div>
     )
 }
